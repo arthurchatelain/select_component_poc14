@@ -8,8 +8,7 @@ node
 React
 
 ### INSTALL ###
-command line : npm i select_component_poc14
-then in the file you wanna use it in import the component : import { Select } from 'select_component_poc14'
+npm i select_component_poc14
 
 ### USAGE ###
 
