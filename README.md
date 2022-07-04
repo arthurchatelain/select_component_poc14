@@ -13,9 +13,13 @@ then in the file you wanna use it in import the component : import { Select } fr
 
 ### USAGE ###
 
+```js
+
 import { Select } from 'select_component_poc14';
 
 const data = [a, b, c];
 
 <Select data={data} title='choose' OnChange={functionThatDeallWithNewData} />
+
+```
 
