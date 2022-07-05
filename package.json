@@ -1,6 +1,6 @@
 {
   "name": "select_component_poc14",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "Arthur Chatelain",
   "keywords": ["Select", "Menu", "Déroulant", "Menu Déroulant"],
   "description": "This is a sleect component that allow the user to choose between different possibilities",

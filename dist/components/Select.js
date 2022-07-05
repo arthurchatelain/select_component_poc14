@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _reactOutsideClickHandler = _interopRequireDefault(require("react-outside-click-handler"));
+
 var _jsxRuntime = require("react/jsx-runtime");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21,8 +23,12 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 /**
  * A select component to choose between different possibilities.
+ * example : 
+ *  ```js
+ * <Select onChange={e => {}} data={[''value1', 'value2', 'value3']} title='Department'/>
+ * ```
  * @prop {string} title - The select title that will be used as the default value
- * @prop {func} OnChange - Function to call when the user select a new possibility 
+ * @prop {func} onChange - Function to call when the user select a new possibility 
  * @prop {array} data - An array of string with the different possibilities
  */
 
@@ -44,9 +50,10 @@ function Select(props) {
 
   const handleClick = e => {
     // e is the new value
+    let value = e.target.dataset.value;
     setIsOpen(false);
-    setValue(e);
-    props.OnChange(e);
+    setValue(value);
+    props.onChange(value);
   };
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -57,17 +64,19 @@ function Select(props) {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
         children: value
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(ArrowBottom, {})]
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      className: "selectContainer",
-      children: props.data.map(item => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        className: "selectCells",
-        onClick: e => {
-          handleClick(e.target.firstChild.textContent);
-        },
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactOutsideClickHandler.default, {
+      onOutsideClick: () => setIsOpen(false),
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "selectContainer",
+        children: props.data.map(item => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          "data-value": item,
+          className: "selectCells",
+          onClick: e => {
+            handleClick(e);
+          },
           children: item
-        })
-      }, item))
+        }, item))
+      })
     })
   });
 }
